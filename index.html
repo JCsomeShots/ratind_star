@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating system</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="container_star">
+        <i class="fa fa-2x fa-star" data-index = "0"></i>
+        <i class="fa fa-2x fa-star" data-index = "1"></i>
+        <i class="fa fa-2x fa-star" data-index = "2"></i>
+        <i class="fa fa-2x fa-star" data-index = "3"></i>
+        <i class="fa fa-2x fa-star" data-index = "4"></i>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
+    <script src="jquery.js"></script>
+    <script>
+        var rated_index = -1 , uID = 0
+        $(document).ready(function(){
+            reset_starscolors();
+            // rated_index = parseInt( $(this).data('index'));
+            // localStorage.setItem('rated_index' , rated_index)
+
+
+            if(localStorage.getItem('rated_index') != null){
+                set_stars(parseInt( localStorage.getItem('rated_index')))
+            }
+
+            $('.fa-star').on('click' , function(){
+                rated_index = parseInt( $(this).data('index'));
+                // console.log(rated_index);
+                localStorage.setItem('rated_index' , rated_index)
+                // save_DB();
+            });
+
+            $('.fa-star').mouseover(function(){
+                // console.log('here')
+                reset_starscolors()
+                // var current_index = parseInt( $(this).attr('data-index'))
+                var current_index = parseInt( $(this).data('index'));
+                // console.log(current_index)
+                // for (let i = 0; i<= current_index; i++){
+                //     $('.fa-star:eq('+i+')').css('color' , 'yellow');
+                    
+                // }
+
+                set_stars(current_index);
+            })
+            $('.fa-star').mouseleave(function(){
+                // console.log('here2')
+                reset_starscolors();
+                if(rated_index != -1){
+                    set_stars(rated_index);
+                }
+            })
+        })
+        function save_DB(){
+            $.ajax({
+                url:"index.php",
+                method: "POST",
+                dataType: "json",
+                data: {
+                    save: 1,
+                    uID,
+                    rated_index
+                },
+                success: function(r){
+                  uID = r.uID  
+
+                }
+            })
+        }
+        function set_stars(max){
+            
+            for (let i = 0; i<= max; i++){
+                $('.fa-star:eq('+i+')').css('color' , 'yellow');
+            }
+        }
+        function reset_starscolors(){
+            $('.fa-star').css('color', 'white');
+
+        }
+    </script>
+    
+</body>
+</html>
