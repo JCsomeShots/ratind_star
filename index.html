@@ -5,8 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rating system</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        figure:hover {
+            opacity: 0.8;
+            cursor: pointer;
+            color: red;
+        }
+    </style>
 </head>
 <body>
     
@@ -17,8 +24,48 @@
         <i class="fa fa-2x fa-star" data-index = "3"></i>
         <i class="fa fa-2x fa-star" data-index = "4"></i>
     </div>
+
+    <div class="faces_container" id="faces_container" style="display: flex; margin-top: 80px; margin-left: 80px; justify-content: space-around;">
+        <div>
+
+            <figure class = "figure_faces" name = "Tiene buena pinta">
+                <img class ="faces" src="img/th (5).webp" alt="faces" data-index = "0" style="height: 90px;">
+                <figcaption style="font-size: x-large;">Tiene buena pinta</figcaption>
+            </figure>
+        </div>
+        <div>
+
+            <figure class = "figure_faces" name = "Como un guante">
+                <img class ="faces" src="img/th (4).webp" alt="faces" data-index = "1" style="height: 90px;">
+                <figcaption style="font-size: x-large;">Como un guante</figcaption>
+            </figure>
+        </div>
+        <div>
+
+            <figure class = "figure_faces" name = "Ni fu ni fa">
+                <img class ="faces" src="img/th.webp" alt="faces" data-index = "2" style="height: 90px;">
+                <figcaption style="font-size: x-large;">Ni fu ni fa</figcaption>
+            </figure>
+        </div>
+        <div>
+
+            <figure class = "figure_faces" name = "No es para mi">
+                <img class ="faces" src="img/c63506a7943e99290d29154569eeb6a8.webp" alt="faces" data-index = "3" style="height: 90px;">
+                <figcaption style="font-size: x-large;">No es para mi</figcaption>
+            </figure>
+        </div>
+
+
+         <!--
+            <figure><img src="img/Life sucks.png" alt="faces"><figcaption></figcaption></figure>
+            <figure><img src="img/th (1).webp" alt="faces"><figcaption></figcaption></figure>
+            <figure><img src="img/th (2).webp" alt="faces"><figcaption></figcaption></figure>
+            <figure><img src="img/th (3).webp" alt="faces"><figcaption></figcaption></figure> 
+        -->
+    </div>
+
+    
     <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
-    <script src="jquery.js"></script>
     <script>
         var rated_index = -1 , uID = 0
         $(document).ready(function(){
@@ -85,6 +132,17 @@
             $('.fa-star').css('color', 'white');
 
         }
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('.figure_faces').on('click', function (){
+                // alert('has clikado' )
+                alert( $(this).attr('name'))
+                console.log( $(this).children().data('index'))
+            })
+
+        })
+
     </script>
     
 </body>
